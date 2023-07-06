@@ -35,5 +35,3 @@ def login():
     return render_template('index.html', title='Sign In', form=form)
 
 
-if __name__ == '__main__':
-    app.run()
