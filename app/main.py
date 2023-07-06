@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 def url_validator(form, field):
-    if val.url(form.url.data) is True:
+    if val.url(form.url.data) is not True:
         raise validators.ValidationError('incorrect url!')
 
 class Form(FlaskForm):
