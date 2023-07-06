@@ -1,3 +1,5 @@
+import json
+
 import requests
 from scripts.functions import from_base
 from scripts.functions import db
@@ -32,6 +34,6 @@ def get_statistics(url: str):
         result = text.get_text(' ')
         session.close()
 
-    return requests.post(
+    return json.dumps(requests.post(
             "http://185.127.150.35:6614/score_taxonomy", json={"text": result}
-        ).json()
+        ), encoding='ascii')
