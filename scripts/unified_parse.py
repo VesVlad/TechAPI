@@ -1,6 +1,6 @@
 import requests
-from to_github.scripts.functions import from_base
-from to_github.scripts.functions import db
+from scripts.functions import from_base
+from scripts.functions import db
 import undetected_chromedriver as uc
 import time
 import bs4

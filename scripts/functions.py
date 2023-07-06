@@ -1,5 +1,5 @@
-from to_github.common_scripts.db import DB
-from to_github.common_scripts.config_db import DB_COURSES
+from common_scripts.db import DB
+from common_scripts.config_db import DB_COURSES
 import re
 
 from selenium.webdriver.support.wait import WebDriverWait

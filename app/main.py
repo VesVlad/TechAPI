@@ -4,8 +4,8 @@ from wtforms.validators import DataRequired
 from flask import Flask, render_template
 from wtforms import StringField, validators
 import validators as val
-from to_github.config import Config
-from to_github.scripts.unified_parse import get_statistics
+from config import Config
+from scripts.unified_parse import get_statistics
 
 app = Flask(__name__)
 app.config.from_object(Config)
