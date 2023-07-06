@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 def url_validator(form, field):
-    if ~isinstance(val.url(form.url.data), bool):
+    if val.url(form.url.data) is True:
         raise validators.ValidationError('incorrect url!')
 
 class Form(FlaskForm):
@@ -33,5 +33,3 @@ def login():
 
 
     return render_template('index.html', title='Sign In', form=form)
-
-
