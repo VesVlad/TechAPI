@@ -34,6 +34,6 @@ def get_statistics(url: str):
         result = text.get_text(' ')
         session.close()
 
-    return json.dumps(requests.post(
+    return requests.post(
             "http://185.127.150.35:6614/score_taxonomy", json={"text": result}
-        ), encoding='ascii')
+        ).json()
