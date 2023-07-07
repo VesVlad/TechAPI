@@ -4,13 +4,27 @@
         {{ form.hidden_tag() }}
         <p>
             {{ form.url.label }}<br>
-            {{ form.url() }}
+            {{ form.url(style='height: auto; width: 200px') }}
             {% for error in form.url.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
+        <p>
+        <b> Result: </b>
+        </p>
+<!--        <p style="display: none;" id="value"> {{ form.result.default }} </p>-->
 
-        <p> {{form.result.default }}</p>
+<!--        <script>-->
+<!--            var result = document.getElementById("value")-->
+<!--            var view_result = ""-->
+<!--            if result != "None" {-->
+<!--                view_result = result-->
+<!--            } else {-->
+<!--                view_result = ""-->
+<!--            }-->
+<!--            document.getElementById("result").innerHTML = view_result;-->
+<!--        </script>-->
+        <p> {{ form.result.default }} </p>
     </form>
 {% endblock %}

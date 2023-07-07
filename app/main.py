@@ -1,7 +1,9 @@
+import json
+
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
 from wtforms.validators import DataRequired
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from wtforms import StringField, validators
 import validators as val
 from config import Config
@@ -12,7 +14,7 @@ app.config.from_object(Config)
 
 def url_validator(form, field):
     if val.url(form.url.data) is not True:
-        raise validators.ValidationError('incorrect url!')
+        raise validators.ValidationError('uncorrect url!')
 
 class Form(FlaskForm):
     url = StringField('url', validators=[DataRequired(), url_validator])
@@ -33,3 +35,20 @@ def login():
 
 
     return render_template('index.html', title='Sign In', form=form)
+
+
+@app.route('/api', methods=['post'])
+def url():
+    if request.method == 'POST':
+        url =request.args.get('url')
+        if url:
+            try:
+                if val.url(url) is True:
+                    json_result = get_statistics(url)
+                    return json.dumps(json_result, ensure_ascii=False)
+                else:
+                    return json.dumps({'uncorrect url!': 400})
+            except Exception:
+                return json.dumps({'Underfined error!': 400})
+        else:
+            return json.dumps({'Underfined usage!': 400})

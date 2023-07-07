@@ -26,13 +26,20 @@ def get_statistics(url: str):
         result = " ".join(list(filter(lambda x: isinstance(x, str), row)))
 
     else:
-        session = uc.Chrome()
-        session.get(url)
+        options = uc.ChromeOptions()
+        options.add_argument("--headless")
+        session = uc.Chrome(options=options)
+        session.get('https://skillfactory.ru/frontend-razrabotchik')
         html = session.execute_script("return document.body.innerHTML")
         time.sleep(3)
-        text = bs4.BeautifulSoup(html, "lxml")
-        result = text.get_text(' ')
-        session.close()
+        soup = bs4.BeautifulSoup(html, features="lxml")
+
+        for script in soup(["script", "style", "header", "footer"]):
+            script.extract()
+        try:
+            result = soup.find('main').get_text(' ')
+        except:
+            result = soup.get_text(' ')
 
     return requests.post(
             "http://185.127.150.35:6614/score_taxonomy", json={"text": result}
